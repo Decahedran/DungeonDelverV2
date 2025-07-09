@@ -1,23 +1,39 @@
-import React, { useContext } from 'react';
-import './App.css';
-import SeedMonster from './components/SeedMonster';
-import { SeedContext } from './context/SeedContext';
+import React from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+
+import AboutPage from './pages/AboutPage';
+import DownloadsPage from './pages/DownloadsPage';
+import FAQPage from './pages/FAQPage';
+import GamePage from './pages/GamePage';
+import HomePage from './pages/HomePage';
+import LandingPage from './pages/LandingPage';
+import LorePage from './pages/LorePage';
+import PrivacyPage from './pages/PrivacyPage';
+import ShopPage from './pages/ShopPage';
+import TermsPage from './pages/TermsPage';
+import WorldPage from './pages/WorldPage';
 
 function App() {
-  const { seed } = useContext(SeedContext);
-
   return (
-    <div className="container">
-      <h1>🛠️ Dungeon Delver V2</h1>
-      <h2>Coming Soon</h2>
-      <p>A new kind of dungeon awaits beneath the Gloomwell...</p>
-      <p className="note">Site under construction. Check back soon!</p>
+    <Routes>
+      {/* Public-facing landing page */}
+      <Route path="/" element={<LandingPage />} />
 
-      <div style={{ marginTop: '2rem', fontSize: '0.9rem', color: '#888' }}>
-        Current Seed: <code>{seed}</code>
-      </div>
-      <SeedMonster />
-    </div>
+      {/* Internal site navigation */}
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/shop" element={<ShopPage />} />
+      <Route path="/lore" element={<LorePage />} />
+      <Route path="/world" element={<WorldPage />} />
+      <Route path="/downloads" element={<DownloadsPage />} />
+      <Route path="/faq" element={<FAQPage />} />
+      <Route path="/play" element={<GamePage />} />
+      <Route path="/terms" element={<TermsPage />} />
+      <Route path="/privacy" element={<PrivacyPage />} />
+
+      {/* Fallback for unknown routes */}
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
   );
 }
 
