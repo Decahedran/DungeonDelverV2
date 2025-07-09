@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #0d0d0d;
+    color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+  
+  .container {
+    max-width: 500px;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 0.2em;
+    color: #facc15;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    color: #a855f7;
+  }
+  
+  .note {
+    margin-top: 1em;
+    font-size: 0.9rem;
+    color: #9ca3af;
+  }
+  
