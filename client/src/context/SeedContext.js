@@ -8,7 +8,7 @@ export function SeedProvider({ children }) {
   // Generate a new seed based on the current 5-minute window
   function generateSeed() {
     const now = new Date();
-    const rounded = Math.floor(now.getTime() / (5 * 60 * 1000)) * (5 * 60 * 1000);
+    const rounded = Math.floor(now.getTime() / (1 * 60 * 1000)) * (1 * 60 * 1000);
     return new Date(rounded).toISOString(); // ISO format seed
   }
 
