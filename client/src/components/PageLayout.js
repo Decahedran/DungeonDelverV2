@@ -1,19 +1,24 @@
-import React, { useContext } from 'react';
-import { SeedContext } from '../context/SeedContext';
+import React from 'react';
+import Footer from './Footer';
 import NavBar from './NavBar';
 
 function PageLayout({ children }) {
-  const { seed } = useContext(SeedContext);
-
   return (
-    <div style={{ fontFamily: 'Segoe UI, sans-serif', minHeight: '100vh', color: '#eee' }}>
+    <div
+      style={{
+        fontFamily: 'Segoe UI, sans-serif',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: '#0d0d0d',
+        color: '#eee'
+      }}
+    >
       <NavBar />
-      <div style={{ padding: '2rem' }}>
+      <div style={{ flex: 1, padding: '2rem' }}>
         {children}
       </div>
-      <footer style={{ padding: '1rem', textAlign: 'center', fontSize: '0.8rem', color: '#888' }}>
-        🔁 Current Seed: <code>{seed}</code>
-      </footer>
+      <Footer />
     </div>
   );
 }

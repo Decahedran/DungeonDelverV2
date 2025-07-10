@@ -1,27 +1,41 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PageLayout from '../components/PageLayout';
+import RoomRenderer from '../components/RoomRenderer';
 import { SeedContext } from '../context/SeedContext';
 import { generateDungeonFromSeed } from '../utils/generateDungeonFromSeed';
 
 function GamePage() {
   const { seed } = useContext(SeedContext);
   const dungeon = generateDungeonFromSeed(seed);
+  const [currentRoomIndex, setCurrentRoomIndex] = useState(0);
+
+  const currentRoom = dungeon[currentRoomIndex];
+
+  const goNext = () => {
+    if (currentRoomIndex < dungeon.length - 1) {
+      setCurrentRoomIndex((i) => i + 1);
+    }
+  };
+
+  const goBack = () => {
+    if (currentRoomIndex > 0) {
+      setCurrentRoomIndex((i) => i - 1);
+    }
+  };
 
   return (
     <PageLayout>
       <h1>🧩 Daily Dungeon</h1>
-      <p><code>{seed}</code></p>
+      <RoomRenderer seed={seed} roomIndex={currentRoomIndex} roomMeta={currentRoom} />
 
-      <ol>
-        {dungeon.map((room, i) => (
-          <li key={i}>
-            {room.type === 'boss' && '🏆 Final Boss Room'}
-            {room.type === 'combat' && `⚔️ Combat (${room.difficulty})`}
-            {room.type === 'puzzle' &&
-              `🧠 Puzzle (${room.variant}${room.trapped ? ', trapped' : ''})`}
-          </li>
-        ))}
-      </ol>
+      <div style={{ marginTop: '1rem' }}>
+        <button onClick={goBack} disabled={currentRoomIndex === 0}>
+          ⬅️ Prev Room
+        </button>
+        <button onClick={goNext} disabled={currentRoomIndex === dungeon.length - 1}>
+          Next Room ➡️
+        </button>
+      </div>
     </PageLayout>
   );
 }
